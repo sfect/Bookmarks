@@ -1,0 +1,12 @@
+<%= render 'shared/content_title', title: "新規カテゴリー" %>
+<%= render 'shared/errors', obj: @category %>
+
+<div class='well'>
+  <%= form_for @category do |f| %>
+    <div class='control-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <%= f.submit "カテゴリーを作成", class: 'btn btn-success' %>
+  <% end %>
+</div>  

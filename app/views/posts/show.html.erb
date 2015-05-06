@@ -1,0 +1,32 @@
+
+<% if logged_in? %>
+  <p class='pull-right'>
+    [<%= link_to 'エントリーを編集', edit_post_path(@post) %>]
+  </p>
+<% end %>
+
+<p>
+  <%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<p>
+  <%= @post.description %>
+</p>
+<hr/>
+
+<%= form_for [@post, @comment] do |f| %>
+  <%= render 'shared/errors', obj: @comment %>
+  <div class='control-group'>
+    <%= f.label :body, 'コメントする' %>
+    <%= f.text_area :body, rows: 3, class: 'span4' %>
+  </div>
+  <%= f.submit "コメント", class: 'btn btn-primary' %>
+<% end %>
+
+<h5>コメント：</h5>
+
+<% @post.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
