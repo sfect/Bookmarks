@@ -1,65 +1,73 @@
-<ul class="nav">
-  <li>
-    <%= link_to "ソーシャルブックマーク", root_path, :class => 'brand' %>
-  </li>
-
-  <div class='btn-group nav_item'>
-    <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
-      カテゴリー<span class='caret'></span>
-    <% end %>
-    <ul class='dropdown-menu'>
-      <% Category.all.each do |category| %>
-        <li>
-          <%= link_to category.name, category_path(category)%>
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Bookmarks", root_path, :class => 'navbar-brand' %>
+    </div>  
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% Category.all.each do |category| %>
+              <li>
+                <%= link_to category.name, category_path(category)%>
+              </li>
+            <% end %>
+            <li role="separator" class="divider"></li>
+            <li>
+              <%= link_to(new_category_path) do %>
+                <i class="icon-plus"></i>
+                New Category
+                <% end %>
+            </li>
+          </ul>
         </li>
-      <% end %>
-      <li class='divider'></li>
-      <li>
-        <%= link_to(new_category_path) do %>
-          <i class="icon-plus"></i>
-          新規カテゴリー
-          <% end %>
-      </li>
-    </ul>
-  </div>
-
-  <% if logged_in? %>
-    <div class='nav_item'>
-      <%= link_to 'ウェブページを投稿する', new_post_path, class: 'btn btn-success btn-small' %>
-    </div> 
-    <div class='btn-group nav_item'>
-      <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do %>
-        <%= current_user.username %>
-        <span class='caret'></span>
-      <% end %>
-      <ul class='dropdown-menu'>
-        <li>
-          <%= link_to edit_user_path(current_user) do %>
-            <i class='icon-pencil'></i>
-            プロフィールを編集
-          <% end %>
+      
+        <% if logged_in? %>
+          <div class='nav_item'>
+            <%= link_to 'Create A Bookmark', new_post_path, class: 'btn btn-success navbar-btn' %>
+          </div>
+        <li class="dropdown">
+            <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false') do %>
+              <%= current_user.username %>
+              <span class='caret'></span>
+            <% end %>          
+          <ul class="dropdown-menu">
+              <li>
+                <%= link_to user_path(current_user) do %>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  Profile
+                <% end %>
+              </li>
+              <li>
+                <%= link_to edit_user_path(current_user) do %>
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                  Edit Profile
+                <% end %>
+              </li>
+              <li>
+                <%= link_to logout_path do %>
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                  Logout
+                <% end %>
+              </li>
+          </ul>
         </li>
-        <li>
-          <%= link_to user_path(current_user) do %>
-            <i class='icon-user'></i>
-            プロフィール
-          <% end %>
-        </li>
-        <li>
-          <%= link_to logout_path do %>
-            <i class='icon-circle-arrow-left'></i>
-            ログアウト
-          <% end %>
-        </li>
+        <% else %>
+          <div class='nav_item'>
+            <%= link_to 'Register', register_path, class: 'btn btn-success navbar-btn' %>
+          </div> 
+          <div class='nav_item'>
+            <%= link_to 'Login', login_path, class: 'btn navbar-btn' %>
+          </div> 
+        <% end %>
       </ul>
     </div>
-  <% else %>
-    <div class='nav_item'>
-      <%= link_to 'ユーザー登録', register_path, class: 'btn btn-success btn-small' %>
-    </div> 
-    <div class='nav_item'>
-      <%= link_to 'ログイン', login_path, class: 'btn btn-small' %>
-    </div> 
-  <% end %>
-
-</ul>
+  </div>
+</nav>

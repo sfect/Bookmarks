@@ -2,19 +2,19 @@
 
 <div class='well'>
   <%= form_for @post do |f| %>
-    <div class='control-group'>
-      <%= f.label :タイトル %>
-      <%= f.text_field :title %>
+    <div class='form-group'>
+      <%= f.label :Title, class: "col-sm-2 control-label" %>
+      <%= f.text_field :title, class: "form-control",autofocus: true %>
+    </div>  
+    <div class='form-group'>
+      <%= f.label :URL, class: "col-sm-2 control-label" %>
+      <%= f.text_field :url, class: "form-control" %>
     </div>
-    <div class='control-group'>
-      <%= f.label :URL %>
-      <%= f.text_field :url %>
+    <div class='form-group'>
+      <%= f.label :Description, class: "col-sm-2 control-label" %>
+      <%= f.text_area :description, rows: 5, class: "form-control" %>
     </div>
-    <div class='control-group'>
-      <%= f.label :説明 %>
-      <%= f.text_area :description, rows: 5 %>
-    </div>
-    <div class='control-group'>
+    <div class='form-group'>
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb|%>
       <% cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text} %>
     <% end %>
@@ -23,6 +23,6 @@
     <br/>
     <br/>
 
-    <%= f.submit(@post.new_record? ? '作成' : '編集', class: 'btn btn-primary')%>
+    <%= f.submit(@post.new_record? ? 'Create' : 'Edit', class: 'btn btn-success')%>
   <% end %>
 </div>

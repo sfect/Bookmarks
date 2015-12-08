@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      flash[:notice] = "カテゴリが作成されました。"
+      flash[:notice] = "A new category has been created."
       redirect_to root_path
     else
       render :new
@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    @category = Category.find_by slug: params[:id]
   end
 
   def category_params

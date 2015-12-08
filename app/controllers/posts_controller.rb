@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @post.creator = current_user
 
     if @post.save
-      flash[:notice] = "エントリーが作成されました。"
+      flash[:notice] = "A new bookmark has been created."
       redirect_to posts_path
     else
       render :new
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "エントリーが編集されました。"
+      flash[:notice] = "The changes have been saved."
       redirect_to post_path(@post)
     else
       render :edit
@@ -38,22 +38,28 @@ class PostsController < ApplicationController
   end
 
   def vote
-    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
-    if vote.valid?
-      flash[:notice] = "投票されました。"
-    else
-      flash[:notice] = "同じ投稿には1度しか投票できません。"
+    respond_to do |format|
+      format.html do
+        if vote.valid?
+          flash[:notice] = "Thank you for voting!"
+        else
+          flash[:notice] = "You can only vote once for each bookmark."
+        end
+        redirect_to :back
+      end
+      format.js
     end
-
-    redirect_to :back
   end
+
+  private
 
   def post_params
     params.require(:post).permit(:title, :url, :description, category_ids: [])
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by slug: params[:id]
   end
 end

@@ -1,20 +1,21 @@
-<%= render 'shared/content_title', title: "#{@user.username}のプロフィール" %>
+<%= render 'shared/content_title', title: "#{@user.username}'s profile" %>
 
 <div class='well'>
   <dl class='dl-horizontal'>
-    <dt>ユーザー名：</dt>
+    <dt>Username:</dt>
     <dd><%= @user.username %></dd>
   </dl>
 </div>
 
-<h5><%= @user.username %>のアクティビティ</h5>
+<br/>
+<h5><%= @user.username %>&#39;s activity</h5>
 
 <ul class='nav nav-tabs'>
   <li class='<%= 'active' if params[:tab].nil? %>'>
-    <%= link_to "投稿 (#{@user.posts.size})", user_path(@user) %>
+    <%= link_to "Bookmarks (#{@user.posts.size})", user_path(@user) %>
   </li>
   <li class='<%= 'active' if params[:tab] == 'comments' %>'>
-    <%= link_to "コメント (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+    <%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
   </li>
 </ul>
 

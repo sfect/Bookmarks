@@ -1,4 +1,4 @@
-<%= render 'shared/content_title', title: "新規カテゴリー" %>
+<%= render 'shared/content_title', title: "New Category" %>
 <%= render 'shared/errors', obj: @category %>
 
 <div class='well'>
@@ -7,6 +7,6 @@
       <%= f.label :name %>
       <%= f.text_field :name %>
     </div>
-    <%= f.submit "カテゴリーを作成", class: 'btn btn-success' %>
+    <%= f.submit "Create", class: 'btn btn-success' %>
   <% end %>
 </div>  

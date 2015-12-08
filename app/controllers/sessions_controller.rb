@@ -8,17 +8,17 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:notice] = "ログインしました。"
+      flash[:notice] = "You are logged in."
       redirect_to root_path
     else
-      flash[:error] = "ユーザー名またはパスワードが正しくありません。"
+      flash[:error] = "The username or the password that you entered is not valid."
       redirect_to register_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "ログアウトしました。"
+    flash[:notice] = "You have logged out."
     redirect_to root_path
   end
 end

@@ -2,13 +2,13 @@
   <%= form_for @user do |f| %>
   <%= render 'shared/errors', obj: @user %>
   <div class='control-group'>
-    <%= f.label :ユーザー名 %>
+    <%= f.label :Username %>
     <%= f.text_field :username %>
   </div>
   <div class='control-group'>
-    <%= f.label :パスワード %>
+    <%= f.label :Password %>
     <%= f.password_field :password %>
   </div>
-  <%= f.submit @user.new_record? ? "登録" : "更新", class: 'btn btn-success' %>
+  <%= f.submit @user.new_record? ? "Register" : "Save", class: 'btn btn-success' %>
   <% end %>
 </div>

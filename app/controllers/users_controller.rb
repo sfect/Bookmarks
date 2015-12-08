@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "登録が完了しました。"
+      flash[:notice] = "Your account has been created."
       redirect_to root_path
     else
       render :new
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "プロフィールが更新されました。"
+      flash[:notice] = "Your profile has been updated."
       redirect_to user_path(@user)
     else
       render :edit
@@ -40,12 +40,12 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by slug: params[:id]
   end
 
   def require_same_user
     if current_user != @user
-      flash[:error] = "アクセスできません。"
+      flash[:error] = "You cannot access this."
       redirect_to root_path
     end
   end

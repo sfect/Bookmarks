@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ポストイット</title>
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <title>Bookmarks</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -13,18 +14,13 @@
   </head>
   <body>
     <header>
-      <div class="navbar">
-        <div class="navbar-inner">
-          <div class="container">
-            <%= render 'layouts/navigation' %>
-          </div>
-        </div>
+      <div class="container">
+        <%= render 'layouts/navigation' %>
       </div>
     </header>
     <div id="main" role="main">
       <div class="container">
          <div class="row">
-          <div class="span12">
             <%= render 'layouts/messages' %>
             <%= yield %>
           </div>
